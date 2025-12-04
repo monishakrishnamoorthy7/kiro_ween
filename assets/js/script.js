@@ -8,17 +8,54 @@ const bgMusic = document.getElementById('bgMusic');
 const whisperSound = document.getElementById('whisperSound');
 const musicToggle = document.getElementById('musicToggle');
 
-// State
+// State - Check localStorage for global mute state
 let musicPlaying = false;
+let allAudioMuted = localStorage.getItem('hauntedCodeLabMuted') === 'true';
 let ghostMessageTimeout = null;
+
+// Set audio volumes - mild continuous horror ambiance
+if (bgMusic) {
+    bgMusic.volume = 0.25; // Mild volume for continuous play
+    bgMusic.loop = true;
+    bgMusic.preload = 'auto';
+    bgMusic.muted = allAudioMuted; // Apply saved mute state
+}
+if (whisperSound) {
+    whisperSound.volume = 0.15;
+    whisperSound.muted = allAudioMuted; // Apply saved mute state
+}
+
+// Update music toggle button based on saved state
+if (musicToggle && allAudioMuted) {
+    musicToggle.classList.add('muted');
+}
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Hide loading screen
+    // Hide loading screen and start music
     setTimeout(() => {
         const loadingScreen = document.getElementById('loadingScreen');
         if (loadingScreen) {
             loadingScreen.style.display = 'none';
+        }
+        
+        // Auto-start background music after loading (if not muted)
+        if (bgMusic && !allAudioMuted) {
+            bgMusic.play().catch(e => {
+                console.log('Auto-play blocked, waiting for user interaction');
+                // If auto-play is blocked, start on first interaction
+                const startOnInteraction = () => {
+                    if (!musicPlaying && !allAudioMuted) {
+                        bgMusic.play().catch(err => console.log('Audio blocked:', err));
+                        musicPlaying = true;
+                    }
+                };
+                document.addEventListener('click', startOnInteraction, { once: true });
+                document.addEventListener('keydown', startOnInteraction, { once: true });
+            });
+            musicPlaying = true;
+        } else if (allAudioMuted) {
+            console.log('Audio muted globally - respecting user preference');
         }
     }, 3000);
 
@@ -183,19 +220,49 @@ function initCursorTrail() {
 // MUSIC TOGGLE
 // ============================================
 function initMusicToggle() {
-    if (!musicToggle || !bgMusic) return;
+    if (!musicToggle) return;
 
-    musicToggle.addEventListener('click', () => {
-        if (musicPlaying) {
-            bgMusic.pause();
-            musicToggle.querySelector('.music-icon').textContent = '🔇';
-            musicToggle.classList.add('muted');
-            musicPlaying = false;
-        } else {
-            bgMusic.play().catch(e => console.log('Audio blocked:', e));
-            musicToggle.querySelector('.music-icon').textContent = '🔊';
+    // Toggle button
+    musicToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        
+        if (allAudioMuted) {
+            // Unmute all
+            allAudioMuted = false;
+            localStorage.setItem('hauntedCodeLabMuted', 'false'); // Save to localStorage
+            
+            if (bgMusic) {
+                bgMusic.muted = false;
+                bgMusic.volume = 0.25; // Mild continuous volume
+                bgMusic.play().catch(e => console.log('Audio blocked:', e));
+            }
+            if (whisperSound) {
+                whisperSound.muted = false;
+                whisperSound.volume = 0.15;
+            }
+            
             musicToggle.classList.remove('muted');
             musicPlaying = true;
+            
+            console.log('🔊 Audio unmuted globally - will apply to all pages');
+        } else {
+            // Mute all
+            allAudioMuted = true;
+            localStorage.setItem('hauntedCodeLabMuted', 'true'); // Save to localStorage
+            
+            if (bgMusic) {
+                bgMusic.pause();
+                bgMusic.muted = true;
+            }
+            if (whisperSound) {
+                whisperSound.pause();
+                whisperSound.muted = true;
+            }
+            
+            musicToggle.classList.add('muted');
+            musicPlaying = false;
+            
+            console.log('🔇 Audio muted globally - will apply to all pages');
         }
     });
 }
@@ -404,9 +471,9 @@ function showGhostModal(message) {
 // UTILITY FUNCTIONS
 // ============================================
 function playSound(audio) {
-    if (audio) {
+    if (audio && !allAudioMuted) {
         audio.currentTime = 0;
-        audio.volume = 0.5;
+        audio.volume = audio === bgMusic ? 0.25 : 0.15; // Mild volumes
         audio.play().catch(e => console.log('Audio blocked:', e));
     }
 }
