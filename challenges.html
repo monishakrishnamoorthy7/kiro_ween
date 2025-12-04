@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👻 Challenges - Haunted CodeLab</title>
+    <title>Challenges - Haunted CodeLab</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Monaco Editor -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.min.css">
 </head>
 <body>
     <div id="staticTransition" class="static-transition"></div>
-    <button id="musicToggle" class="music-toggle">🔊</button>
+    <button id="musicToggle" class="music-toggle">
+        <svg class="music-icon" viewBox="0 0 24 24">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+        </svg>
+    </button>
 
     <div class="container">
         <header class="main-header">
@@ -408,13 +414,70 @@
         </div>
     </div>
 
+    <!-- Code Editor Modal -->
+    <div id="editorModal" class="editor-modal">
+        <div class="editor-modal-content">
+            <div class="editor-modal-header">
+                <div class="editor-header-left">
+                    <h2 id="modalChallengeTitle" class="modal-challenge-title">Challenge Title</h2>
+                    <span id="modalDifficulty" class="difficulty-badge easy">EASY</span>
+                </div>
+                <button class="close-modal" onclick="closeEditorModal()">✕</button>
+            </div>
+            
+            <div class="editor-modal-body">
+                <!-- Problem Statement -->
+                <div class="problem-statement-panel">
+                    <h3 class="panel-header">📜 Problem Statement</h3>
+                    <div id="problemStatement" class="problem-statement-content">
+                        <p>Loading challenge...</p>
+                    </div>
+                </div>
+
+                <!-- Code Editor -->
+                <div class="code-editor-panel">
+                    <div class="editor-toolbar">
+                        <div class="language-selector-container">
+                            <label for="languageSelect">Language:</label>
+                            <select id="languageSelect" class="language-select" onchange="changeLanguage()">
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="cpp">C++</option>
+                                <option value="java">Java</option>
+                            </select>
+                        </div>
+                        <button class="run-code-button" onclick="runCode()">▶ Run Code</button>
+                    </div>
+                    
+                    <div id="monacoEditor" class="monaco-editor-container"></div>
+                    
+                    <!-- Output Console -->
+                    <div class="output-console">
+                        <div class="console-header">
+                            <span>💀 Output Console</span>
+                            <button class="clear-console" onclick="clearConsole()">Clear</button>
+                        </div>
+                        <div id="consoleOutput" class="console-content">
+                            <div class="console-line ghost-text">👻 The ghost awaits your code...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <canvas id="cursorCanvas"></canvas>
 
     <audio id="bgMusic" loop>
         <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- Monaco Editor Loader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/challenges.js"></script>
 </body>
 </html>
+
+
+

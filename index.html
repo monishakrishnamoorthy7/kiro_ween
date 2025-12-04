@@ -3,28 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👻 Haunted CodeLab - Survive the Ghost by Solving Code</title>
+    <title>HAUNTED CODELAB - Cursed Terminal</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="skull-loader">💀</div>
-        <p class="loading-text">Loading the curse...</p>
+    <!-- CRT Scanlines Overlay -->
+    <div class="crt-scanlines"></div>
+    
+    <!-- Fog Overlay -->
+    <div class="fog-overlay">
+        <div class="fog fog-1"></div>
+        <div class="fog fog-2"></div>
+        <div class="fog fog-3"></div>
     </div>
 
-    <!-- Static Transition -->
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="skull-loader">
+            <svg viewBox="0 0 100 100" class="horror-skull-loader">
+                <path d="M50 20 Q30 20 20 35 Q15 45 15 55 L15 65 Q15 70 20 70 L25 70 L25 75 Q25 80 30 80 L40 80 L40 85 Q40 90 45 90 L55 90 Q60 90 60 85 L60 80 L70 80 Q75 80 75 75 L75 70 L80 70 Q85 70 85 65 L85 55 Q85 45 80 35 Q70 20 50 20 Z" fill="#E8E8E8"/>
+                <ellipse cx="38" cy="50" rx="8" ry="10" fill="#000"/>
+                <ellipse cx="62" cy="50" rx="8" ry="10" fill="#000"/>
+                <ellipse cx="50" cy="75" rx="12" ry="8" fill="#000"/>
+            </svg>
+        </div>
+        <div class="glitch-loader" data-text="INITIALIZING CURSE...">INITIALIZING CURSE...</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Static Glitch Transition -->
     <div id="staticTransition" class="static-transition"></div>
 
     <!-- Background Music Toggle -->
-    <button id="musicToggle" class="music-toggle">🔊</button>
+    <button id="musicToggle" class="music-toggle" aria-label="Toggle Music">
+        <svg class="music-icon" viewBox="0 0 24 24">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+        </svg>
+    </button>
 
-    <!-- Floating Ghost -->
-    <div class="floating-ghost">
-        <svg width="100" height="100" viewBox="0 0 100 100">
-            <path d="M50 20 Q30 20 20 40 L20 70 Q25 65 30 70 Q35 75 40 70 Q45 65 50 70 Q55 75 60 70 Q65 65 70 70 Q75 75 80 70 L80 40 Q70 20 50 20 Z" fill="#9d4edd" opacity="0.8"/>
+    <!-- Floating Ghost Silhouettes -->
+    <div class="ghost-silhouette ghost-1">
+        <svg width="80" height="80" viewBox="0 0 100 100">
+            <path d="M50 15 Q25 15 15 40 L15 75 Q20 70 25 75 Q30 80 35 75 Q40 70 45 75 Q50 80 55 75 Q60 70 65 75 Q70 80 75 75 Q80 70 85 75 L85 40 Q75 15 50 15 Z" fill="currentColor" opacity="0.6"/>
+            <circle cx="38" cy="45" r="6" fill="#000"/>
+            <circle cx="62" cy="45" r="6" fill="#000"/>
+            <path d="M40 60 Q50 65 60 60" stroke="#000" stroke-width="2" fill="none"/>
+        </svg>
+    </div>
+    <div class="ghost-silhouette ghost-2">
+        <svg width="60" height="60" viewBox="0 0 100 100">
+            <path d="M50 20 Q30 20 20 40 L20 70 Q25 65 30 70 Q35 75 40 70 Q45 65 50 70 Q55 75 60 70 Q65 65 70 70 Q75 75 80 70 L80 40 Q70 20 50 20 Z" fill="currentColor" opacity="0.5"/>
             <circle cx="40" cy="45" r="5" fill="#000"/>
             <circle cx="60" cy="45" r="5" fill="#000"/>
+        </svg>
+    </div>
+    <div class="ghost-silhouette ghost-3">
+        <svg width="70" height="70" viewBox="0 0 100 100">
+            <path d="M50 18 Q28 18 18 42 L18 72 Q23 67 28 72 Q33 77 38 72 Q43 67 48 72 Q53 77 58 72 Q63 67 68 72 Q73 77 78 72 Q83 67 88 72 L88 42 Q78 18 50 18 Z" fill="currentColor" opacity="0.4"/>
+            <circle cx="39" cy="46" r="5" fill="#000"/>
+            <circle cx="61" cy="46" r="5" fill="#000"/>
         </svg>
     </div>
 
@@ -32,40 +74,252 @@
     <div class="container">
         <!-- Header -->
         <header class="main-header">
-            <h1 class="glitch-title" data-text="HAUNTED CODELAB">HAUNTED CODELAB</h1>
-            <p class="subtitle typewriter">Survive the Ghost by Solving Code</p>
+            <div class="glitch-wrapper">
+                <h1 class="glitch-title" data-text="HAUNTED CODELAB">HAUNTED CODELAB</h1>
+            </div>
+            <p class="subtitle">
+                <span class="typewriter" id="typewriterText"></span>
+                <span class="cursor-blink">_</span>
+            </p>
+            <div class="header-decoration">
+                <svg class="skull-icon" viewBox="0 0 50 50">
+                    <path d="M25 10 Q15 10 10 20 Q8 25 8 30 L8 35 Q8 37 10 37 L12 37 L12 40 Q12 42 14 42 L20 42 L20 44 Q20 46 22 46 L28 46 Q30 46 30 44 L30 42 L36 42 Q38 42 38 40 L38 37 L40 37 Q42 37 42 35 L42 30 Q42 25 40 20 Q35 10 25 10 Z" fill="currentColor"/>
+                    <ellipse cx="18" cy="26" rx="4" ry="5" fill="#000"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5" fill="#000"/>
+                    <ellipse cx="25" cy="38" rx="6" ry="4" fill="#000"/>
+                </svg>
+                <span class="divider-line"></span>
+                <svg class="ghost-icon" viewBox="0 0 50 50">
+                    <path d="M25 8 Q15 8 10 18 L10 35 Q12 32 15 35 Q18 38 20 35 Q22 32 25 35 Q28 38 30 35 Q32 32 35 35 Q38 32 40 35 L40 18 Q35 8 25 8 Z" fill="currentColor"/>
+                    <circle cx="19" cy="22" r="3" fill="#FF0000"/>
+                    <circle cx="31" cy="22" r="3" fill="#FF0000"/>
+                    <path d="M20 28 Q25 30 30 28" stroke="#000" stroke-width="2" fill="none"/>
+                </svg>
+                <span class="divider-line"></span>
+                <svg class="skull-icon" viewBox="0 0 50 50">
+                    <path d="M25 10 Q15 10 10 20 Q8 25 8 30 L8 35 Q8 37 10 37 L12 37 L12 40 Q12 42 14 42 L20 42 L20 44 Q20 46 22 46 L28 46 Q30 46 30 44 L30 42 L36 42 Q38 42 38 40 L38 37 L40 37 Q42 37 42 35 L42 30 Q42 25 40 20 Q35 10 25 10 Z" fill="currentColor"/>
+                    <ellipse cx="18" cy="26" rx="4" ry="5" fill="#000"/>
+                    <ellipse cx="32" cy="26" rx="4" ry="5" fill="#000"/>
+                    <ellipse cx="25" cy="38" rx="6" ry="4" fill="#000"/>
+                </svg>
+            </div>
         </header>
 
         <!-- Navigation Menu -->
         <nav class="main-nav">
-            <a href="index.html" class="nav-link active">Home</a>
-            <a href="practice.html" class="nav-link">Coding Practice</a>
-            <a href="quiz.html" class="nav-link">Horror Quiz</a>
-            <a href="challenges.html" class="nav-link">Challenges</a>
-            <a href="about.html" class="nav-link">About the Curse</a>
+            <a href="index.html" class="screaming-skull-link active">
+                <svg class="skull-shape" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Skull Dome -->
+                    <path class="skull-dome" d="M50 10 Q25 10 15 30 Q10 40 10 55 L10 70 Q10 75 15 75 L20 75 L20 85 Q20 90 25 90 L35 90 L35 95 Q35 100 40 100 L60 100 Q65 100 65 95 L65 90 L75 90 Q80 90 80 85 L80 75 L85 75 Q90 75 90 70 L90 55 Q90 40 85 30 Q75 10 50 10 Z"/>
+                    
+                    <!-- Cracks -->
+                    <path class="skull-crack crack-1" d="M35 20 L38 35 L35 45"/>
+                    <path class="skull-crack crack-2" d="M65 25 L62 40"/>
+                    <path class="skull-crack crack-3" d="M50 15 L50 30"/>
+                    
+                    <!-- Horror Icon -->
+                    <g class="horror-icon home-icon">
+                        <path d="M50 28 L38 38 L38 50 L44 50 L44 42 L56 42 L56 50 L62 50 L62 38 Z"/>
+                        <path d="M36 40 L34 42 L34 38 Z"/>
+                        <path d="M64 40 L66 42 L66 38 Z"/>
+                    </g>
+                    
+                    <!-- Eye Sockets -->
+                    <ellipse class="eye-socket left-eye" cx="35" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-socket right-eye" cx="65" cy="50" rx="10" ry="14"/>
+                    
+                    <!-- Eye Glow -->
+                    <ellipse class="eye-glow left-glow" cx="35" cy="50" rx="6" ry="8"/>
+                    <ellipse class="eye-glow right-glow" cx="65" cy="50" rx="6" ry="8"/>
+                    
+                    <!-- Nose Cavity (upside-down heart) -->
+                    <path class="nose-cavity" d="M50 65 Q45 70 42 73 Q40 75 40 78 Q40 82 43 82 L50 75 L57 82 Q60 82 60 78 Q60 75 58 73 Q55 70 50 65 Z"/>
+                    
+                    <!-- Screaming Mouth -->
+                    <ellipse class="mouth-opening" cx="50" cy="88" rx="18" ry="10"/>
+                    
+                    <!-- Jagged Teeth -->
+                    <path class="teeth" d="M35 85 L37 90 L39 85 L41 90 L43 85 L45 90 L47 85 L49 90 L51 85 L53 90 L55 85 L57 90 L59 85 L61 90 L63 85 L65 90"/>
+                </svg>
+                <div class="skull-label">Home</div>
+            </a>
+            
+            <a href="practice.html" class="screaming-skull-link">
+                <svg class="skull-shape" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <path class="skull-dome" d="M50 10 Q25 10 15 30 Q10 40 10 55 L10 70 Q10 75 15 75 L20 75 L20 85 Q20 90 25 90 L35 90 L35 95 Q35 100 40 100 L60 100 Q65 100 65 95 L65 90 L75 90 Q80 90 80 85 L80 75 L85 75 Q90 75 90 70 L90 55 Q90 40 85 30 Q75 10 50 10 Z"/>
+                    <path class="skull-crack crack-1" d="M35 20 L38 35 L35 45"/>
+                    <path class="skull-crack crack-2" d="M65 25 L62 40"/>
+                    <path class="skull-crack crack-3" d="M50 15 L50 30"/>
+                    
+                    <g class="horror-icon laptop-icon">
+                        <rect x="38" y="30" width="24" height="16" rx="1"/>
+                        <path d="M40 35 L45 42 M55 35 L50 42"/>
+                        <rect x="36" y="46" width="28" height="2"/>
+                    </g>
+                    
+                    <ellipse class="eye-socket left-eye" cx="35" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-socket right-eye" cx="65" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-glow left-glow" cx="35" cy="50" rx="6" ry="8"/>
+                    <ellipse class="eye-glow right-glow" cx="65" cy="50" rx="6" ry="8"/>
+                    <path class="nose-cavity" d="M50 65 Q45 70 42 73 Q40 75 40 78 Q40 82 43 82 L50 75 L57 82 Q60 82 60 78 Q60 75 58 73 Q55 70 50 65 Z"/>
+                    <ellipse class="mouth-opening" cx="50" cy="88" rx="18" ry="10"/>
+                    <path class="teeth" d="M35 85 L37 90 L39 85 L41 90 L43 85 L45 90 L47 85 L49 90 L51 85 L53 90 L55 85 L57 90 L59 85 L61 90 L63 85 L65 90"/>
+                </svg>
+                <div class="skull-label">Practice</div>
+            </a>
+            
+            <a href="quiz.html" class="screaming-skull-link">
+                <svg class="skull-shape" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <path class="skull-dome" d="M50 10 Q25 10 15 30 Q10 40 10 55 L10 70 Q10 75 15 75 L20 75 L20 85 Q20 90 25 90 L35 90 L35 95 Q35 100 40 100 L60 100 Q65 100 65 95 L65 90 L75 90 Q80 90 80 85 L80 75 L85 75 Q90 75 90 70 L90 55 Q90 40 85 30 Q75 10 50 10 Z"/>
+                    <path class="skull-crack crack-1" d="M35 20 L38 35 L35 45"/>
+                    <path class="skull-crack crack-2" d="M65 25 L62 40"/>
+                    <path class="skull-crack crack-3" d="M50 15 L50 30"/>
+                    
+                    <g class="horror-icon brain-icon">
+                        <path d="M45 28 Q42 28 40 30 Q38 32 38 35 Q38 32 40 30 Q42 28 45 28 M50 26 Q48 26 46 28 Q44 30 44 33 Q44 30 46 28 Q48 26 50 26"/>
+                        <path d="M55 28 Q58 28 60 30 Q62 32 62 35 Q62 32 60 30 Q58 28 55 28"/>
+                        <ellipse cx="50" cy="36" rx="12" ry="10"/>
+                        <path d="M42 36 Q42 40 45 42 M58 36 Q58 40 55 42"/>
+                        <circle cx="48" cy="38" r="1.5"/>
+                        <circle cx="52" cy="38" r="1.5"/>
+                    </g>
+                    
+                    <ellipse class="eye-socket left-eye" cx="35" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-socket right-eye" cx="65" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-glow left-glow" cx="35" cy="50" rx="6" ry="8"/>
+                    <ellipse class="eye-glow right-glow" cx="65" cy="50" rx="6" ry="8"/>
+                    <path class="nose-cavity" d="M50 65 Q45 70 42 73 Q40 75 40 78 Q40 82 43 82 L50 75 L57 82 Q60 82 60 78 Q60 75 58 73 Q55 70 50 65 Z"/>
+                    <ellipse class="mouth-opening" cx="50" cy="88" rx="18" ry="10"/>
+                    <path class="teeth" d="M35 85 L37 90 L39 85 L41 90 L43 85 L45 90 L47 85 L49 90 L51 85 L53 90 L55 85 L57 90 L59 85 L61 90 L63 85 L65 90"/>
+                </svg>
+                <div class="skull-label">Quiz</div>
+            </a>
+            
+            <a href="challenges.html" class="screaming-skull-link">
+                <svg class="skull-shape" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <path class="skull-dome" d="M50 10 Q25 10 15 30 Q10 40 10 55 L10 70 Q10 75 15 75 L20 75 L20 85 Q20 90 25 90 L35 90 L35 95 Q35 100 40 100 L60 100 Q65 100 65 95 L65 90 L75 90 Q80 90 80 85 L80 75 L85 75 Q90 75 90 70 L90 55 Q90 40 85 30 Q75 10 50 10 Z"/>
+                    <path class="skull-crack crack-1" d="M35 20 L38 35 L35 45"/>
+                    <path class="skull-crack crack-2" d="M65 25 L62 40"/>
+                    <path class="skull-crack crack-3" d="M50 15 L50 30"/>
+                    
+                    <g class="horror-icon lightning-icon">
+                        <path d="M52 25 L45 38 L50 38 L46 50 L56 35 L51 35 L55 25 Z"/>
+                        <path d="M44 32 L42 34 M58 32 L60 34"/>
+                    </g>
+                    
+                    <ellipse class="eye-socket left-eye" cx="35" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-socket right-eye" cx="65" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-glow left-glow" cx="35" cy="50" rx="6" ry="8"/>
+                    <ellipse class="eye-glow right-glow" cx="65" cy="50" rx="6" ry="8"/>
+                    <path class="nose-cavity" d="M50 65 Q45 70 42 73 Q40 75 40 78 Q40 82 43 82 L50 75 L57 82 Q60 82 60 78 Q60 75 58 73 Q55 70 50 65 Z"/>
+                    <ellipse class="mouth-opening" cx="50" cy="88" rx="18" ry="10"/>
+                    <path class="teeth" d="M35 85 L37 90 L39 85 L41 90 L43 85 L45 90 L47 85 L49 90 L51 85 L53 90 L55 85 L57 90 L59 85 L61 90 L63 85 L65 90"/>
+                </svg>
+                <div class="skull-label">Challenges</div>
+            </a>
+            
+            <a href="about.html" class="screaming-skull-link">
+                <svg class="skull-shape" viewBox="0 0 100 140" xmlns="http://www.w3.org/2000/svg">
+                    <path class="skull-dome" d="M50 10 Q25 10 15 30 Q10 40 10 55 L10 70 Q10 75 15 75 L20 75 L20 85 Q20 90 25 90 L35 90 L35 95 Q35 100 40 100 L60 100 Q65 100 65 95 L65 90 L75 90 Q80 90 80 85 L80 75 L85 75 Q90 75 90 70 L90 55 Q90 40 85 30 Q75 10 50 10 Z"/>
+                    <path class="skull-crack crack-1" d="M35 20 L38 35 L35 45"/>
+                    <path class="skull-crack crack-2" d="M65 25 L62 40"/>
+                    <path class="skull-crack crack-3" d="M50 15 L50 30"/>
+                    
+                    <g class="horror-icon book-icon">
+                        <rect x="42" y="28" width="16" height="20" rx="1"/>
+                        <path d="M44 32 L56 32 M44 36 L56 36 M44 40 L56 40"/>
+                        <path d="M50 28 L50 48"/>
+                        <path d="M46 44 L48 46 L46 48 M54 44 L52 46 L54 48"/>
+                    </g>
+                    
+                    <ellipse class="eye-socket left-eye" cx="35" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-socket right-eye" cx="65" cy="50" rx="10" ry="14"/>
+                    <ellipse class="eye-glow left-glow" cx="35" cy="50" rx="6" ry="8"/>
+                    <ellipse class="eye-glow right-glow" cx="65" cy="50" rx="6" ry="8"/>
+                    <path class="nose-cavity" d="M50 65 Q45 70 42 73 Q40 75 40 78 Q40 82 43 82 L50 75 L57 82 Q60 82 60 78 Q60 75 58 73 Q55 70 50 65 Z"/>
+                    <ellipse class="mouth-opening" cx="50" cy="88" rx="18" ry="10"/>
+                    <path class="teeth" d="M35 85 L37 90 L39 85 L41 90 L43 85 L45 90 L47 85 L49 90 L51 85 L53 90 L55 85 L57 90 L59 85 L61 90 L63 85 L65 90"/>
+                </svg>
+                <div class="skull-label">About</div>
+            </a>
         </nav>
 
         <!-- Hero Section -->
         <section class="hero-section">
             <div class="hero-content">
-                <p class="hero-description">
-                    Welcome, mortal... You've entered a cursed coding laboratory.
-                    Only by solving the challenges can you break the spell.
-                    The ghost watches your every keystroke...
-                </p>
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">cursed_terminal.exe</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-line">
+                            <span class="prompt">ghost@haunted:~$</span> 
+                            <span class="command">cat curse.txt</span>
+                        </p>
+                        <p class="terminal-output">
+                            Welcome, mortal... You've entered a cursed coding laboratory.
+                        </p>
+                        <p class="terminal-output">
+                            Only by solving the <span class="highlight-red">13 challenges</span> can you break the spell.
+                        </p>
+                        <p class="terminal-output">
+                            The ghost watches your <span class="highlight-purple">every keystroke</span>...
+                        </p>
+                        <p class="terminal-line">
+                            <span class="prompt">ghost@haunted:~$</span> 
+                            <span class="cursor-blink">_</span>
+                        </p>
+                    </div>
+                </div>
 
-                <div class="button-grid">
-                    <a href="practice.html" class="cta-button">
-                        <span>💻 Start Coding Practice</span>
+                <div class="cta-grid">
+                    <a href="practice.html" class="cta-card">
+                        <svg class="cta-icon" viewBox="0 0 100 100">
+                            <rect x="20" y="25" width="60" height="40" rx="2" fill="currentColor" stroke="currentColor" stroke-width="2"/>
+                            <path d="M25 35 L40 50 M60 35 L45 50" stroke="#FF0000" stroke-width="3"/>
+                            <rect x="15" y="65" width="70" height="5" fill="currentColor"/>
+                            <path d="M30 30 L35 40 M65 30 L70 40" stroke="#8B0000" stroke-width="2"/>
+                        </svg>
+                        <div class="cta-title">Coding Practice</div>
+                        <div class="cta-description">Debug cursed algorithms</div>
+                        <div class="cta-hover-effect"></div>
                     </a>
-                    <a href="quiz.html" class="cta-button">
-                        <span>🧠 Take Horror Quiz</span>
+                    <a href="quiz.html" class="cta-card">
+                        <svg class="cta-icon" viewBox="0 0 100 100">
+                            <ellipse cx="50" cy="50" rx="30" ry="25" fill="currentColor"/>
+                            <path d="M30 45 Q30 35 35 35 Q40 35 40 40 M60 45 Q60 35 65 35 Q70 35 70 40" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M35 50 Q35 55 40 58 M65 50 Q65 55 60 58" stroke="#8B0000" stroke-width="2" fill="none"/>
+                            <circle cx="45" cy="48" r="2" fill="#FF0000"/>
+                            <circle cx="55" cy="48" r="2" fill="#FF0000"/>
+                            <path d="M40 60 Q50 65 60 60" stroke="#000" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div class="cta-title">Horror Quiz</div>
+                        <div class="cta-description">Test your haunted knowledge</div>
+                        <div class="cta-hover-effect"></div>
                     </a>
-                    <a href="challenges.html" class="cta-button">
-                        <span>⚡ View Challenges</span>
+                    <a href="challenges.html" class="cta-card">
+                        <svg class="cta-icon" viewBox="0 0 100 100">
+                            <path d="M55 20 L40 50 L50 50 L35 80 L65 45 L55 45 L70 20 Z" fill="currentColor"/>
+                            <path d="M38 45 L35 48 M68 40 L71 43" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="50" cy="50" r="3" fill="#FF0000"/>
+                        </svg>
+                        <div class="cta-title">13 Challenges</div>
+                        <div class="cta-description">Break the eternal curse</div>
+                        <div class="cta-hover-effect"></div>
                     </a>
-                    <a href="about.html" class="cta-button">
-                        <span>📖 About the Curse</span>
+                    <a href="about.html" class="cta-card">
+                        <svg class="cta-icon" viewBox="0 0 100 100">
+                            <rect x="30" y="20" width="40" height="60" rx="2" fill="currentColor"/>
+                            <path d="M35 30 L65 30 M35 40 L65 40 M35 50 L65 50 M35 60 L65 60" stroke="#8B0000" stroke-width="2"/>
+                            <path d="M50 20 L50 80" stroke="#000" stroke-width="2"/>
+                            <path d="M45 65 L48 70 L45 75 M55 65 L52 70 L55 75" stroke="#FF0000" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div class="cta-title">The Curse</div>
+                        <div class="cta-description">Learn the dark origin</div>
+                        <div class="cta-hover-effect"></div>
                     </a>
                 </div>
             </div>
@@ -73,33 +327,121 @@
             <!-- Stats Display -->
             <div class="stats-container">
                 <div class="stat-card">
-                    <div class="stat-number">666</div>
+                    <svg class="stat-icon" viewBox="0 0 60 60">
+                        <path d="M30 12 Q18 12 12 22 Q10 27 10 32 L10 37 Q10 39 12 39 L14 39 L14 42 Q14 44 16 44 L22 44 L22 46 Q22 48 24 48 L36 48 Q38 48 38 46 L38 44 L44 44 Q46 44 46 42 L46 39 L48 39 Q50 39 50 37 L50 32 Q50 27 48 22 Q42 12 30 12 Z" fill="currentColor"/>
+                        <ellipse cx="22" cy="28" rx="5" ry="6" fill="#000"/>
+                        <ellipse cx="38" cy="28" rx="5" ry="6" fill="#000"/>
+                        <ellipse cx="30" cy="42" rx="7" ry="5" fill="#000"/>
+                    </svg>
+                    <div class="stat-number" data-target="666">0</div>
                     <div class="stat-label">Cursed Lines</div>
+                    <div class="stat-glow"></div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">13</div>
+                    <svg class="stat-icon" viewBox="0 0 60 60">
+                        <path d="M30 15 L25 35 L30 35 L22 50 L38 30 L33 30 L40 15 Z" fill="currentColor"/>
+                        <circle cx="30" cy="30" r="4" fill="#FF0000"/>
+                        <path d="M24 28 L22 30 M38 28 L40 30" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="stat-number" data-target="13">0</div>
                     <div class="stat-label">Challenges</div>
+                    <div class="stat-glow"></div>
                 </div>
                 <div class="stat-card">
+                    <svg class="stat-icon" viewBox="0 0 60 60">
+                        <path d="M30 10 Q18 10 12 22 L12 42 Q15 38 18 42 Q21 46 24 42 Q27 38 30 42 Q33 46 36 42 Q39 38 42 42 Q45 46 48 42 L48 22 Q42 10 30 10 Z" fill="currentColor"/>
+                        <circle cx="23" cy="26" r="4" fill="#FF0000"/>
+                        <circle cx="37" cy="26" r="4" fill="#FF0000"/>
+                        <path d="M24 34 Q30 37 36 34" stroke="#000" stroke-width="2" fill="none"/>
+                    </svg>
                     <div class="stat-number">∞</div>
                     <div class="stat-label">Trapped Souls</div>
+                    <div class="stat-glow"></div>
                 </div>
             </div>
         </section>
 
-        <!-- Ghost Message -->
-        <div id="ghostMessage" class="ghost-message"></div>
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">
+                <span class="title-decoration">▼</span>
+                ENTER IF YOU DARE
+                <span class="title-decoration">▼</span>
+            </h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 100 100">
+                        <ellipse cx="50" cy="60" rx="35" ry="30" fill="currentColor"/>
+                        <path d="M50 30 L50 60" stroke="currentColor" stroke-width="4"/>
+                        <path d="M45 35 L50 30 L55 35" fill="currentColor"/>
+                        <path d="M30 50 L35 55 L40 50 L45 55 L50 50 L55 55 L60 50 L65 55 L70 50" stroke="#000" stroke-width="3" fill="none"/>
+                        <ellipse cx="40" cy="55" rx="6" ry="8" fill="#000"/>
+                        <ellipse cx="60" cy="55" rx="6" ry="8" fill="#000"/>
+                        <path d="M45 70 Q50 75 55 70" stroke="#000" stroke-width="3" fill="none"/>
+                    </svg>
+                    <h3 class="feature-title">Haunted Algorithms</h3>
+                    <p class="feature-description">Solve cursed coding problems that will test your sanity</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 100 100">
+                        <ellipse cx="50" cy="40" rx="20" ry="15" fill="currentColor"/>
+                        <path d="M50 55 L50 75" stroke="currentColor" stroke-width="3"/>
+                        <path d="M50 60 L35 70 M50 60 L65 70" stroke="currentColor" stroke-width="3"/>
+                        <path d="M35 70 L30 85 M65 70 L70 85" stroke="currentColor" stroke-width="3"/>
+                        <circle cx="45" cy="38" r="3" fill="#FF0000"/>
+                        <circle cx="55" cy="38" r="3" fill="#FF0000"/>
+                        <path d="M40 45 L45 48 L50 45 L55 48 L60 45" stroke="#000" stroke-width="2" fill="none"/>
+                    </svg>
+                    <h3 class="feature-title">Ghost AI</h3>
+                    <p class="feature-description">An AI ghost that mocks your failures and celebrates victories</p>
+                </div>
+                <div class="feature-card">
+                    <svg class="feature-icon" viewBox="0 0 100 100">
+                        <path d="M50 30 Q35 35 30 45 L30 55 Q30 60 35 60 L40 60 L40 70 Q40 75 45 75 L55 75 Q60 75 60 70 L60 60 L65 60 Q70 60 70 55 L70 45 Q65 35 50 30 Z" fill="currentColor"/>
+                        <path d="M30 45 Q25 40 20 45 L25 50 Q30 45 30 45 M70 45 Q75 40 80 45 L75 50 Q70 45 70 45" fill="currentColor"/>
+                        <ellipse cx="42" cy="50" rx="4" ry="5" fill="#FF0000"/>
+                        <ellipse cx="58" cy="50" rx="4" ry="5" fill="#FF0000"/>
+                        <path d="M45 60 Q50 58 55 60" stroke="#000" stroke-width="2" fill="none"/>
+                    </svg>
+                    <h3 class="feature-title">Dark Challenges</h3>
+                    <p class="feature-description">13 increasingly difficult challenges to break the curse</p>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- Cursor Trail -->
+    <!-- Ghost Message Popup -->
+    <div id="ghostMessage" class="ghost-message">
+        <svg class="ghost-message-icon" viewBox="0 0 60 60">
+            <path d="M30 10 Q18 10 12 22 L12 42 Q15 38 18 42 Q21 46 24 42 Q27 38 30 42 Q33 46 36 42 Q39 38 42 42 Q45 46 48 42 L48 22 Q42 10 30 10 Z" fill="currentColor"/>
+            <circle cx="23" cy="26" r="4" fill="#FF0000"/>
+            <circle cx="37" cy="26" r="4" fill="#FF0000"/>
+            <path d="M24 34 Q30 37 36 34" stroke="#000" stroke-width="2" fill="none"/>
+        </svg>
+        <div class="ghost-message-text"></div>
+    </div>
+
+    <!-- Ghost Modal (for special events) -->
+    <div id="ghostModal" class="ghost-modal">
+        <div class="ghost-modal-content">
+            <svg class="ghost-modal-icon" viewBox="0 0 100 100">
+                <path d="M50 15 Q30 15 20 35 L20 70 Q25 65 30 70 Q35 75 40 70 Q45 65 50 70 Q55 75 60 70 Q65 65 70 70 Q75 75 80 70 L80 35 Q70 15 50 15 Z" fill="currentColor"/>
+                <circle cx="38" cy="42" r="6" fill="#FF0000"/>
+                <circle cx="62" cy="42" r="6" fill="#FF0000"/>
+                <path d="M40 55 Q50 60 60 55" stroke="#000" stroke-width="3" fill="none"/>
+            </svg>
+            <h2 class="ghost-modal-title">THE GHOST SPEAKS</h2>
+            <p class="ghost-modal-text"></p>
+            <button class="ghost-modal-close">DISMISS</button>
+        </div>
+    </div>
+
+    <!-- Cursor Trail Canvas -->
     <canvas id="cursorCanvas"></canvas>
 
     <!-- Audio Elements -->
     <audio id="bgMusic" loop>
         <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="typingSound">
-        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
     </audio>
     <audio id="whisperSound">
         <source src="https://assets.mixkit.co/active_storage/sfx/2482/2482-preview.mp3" type="audio/mpeg">
