@@ -3503,3 +3503,156 @@ body {
     opacity: 0.1;
     z-index: 0;
 }
+
+
+/* === FLOATING HORROR BACKGROUND === */
+.floating-horror-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.float-ghost, .float-pumpkin {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    opacity: 0.4;
+    filter: drop-shadow(0 0 15px currentColor);
+}
+
+.float-1 {
+    top: 10%;
+    left: 15%;
+    animation: floatDrift1 25s ease-in-out infinite;
+}
+
+.float-2 {
+    top: 60%;
+    right: 10%;
+    animation: floatDrift2 30s ease-in-out infinite;
+}
+
+.float-3 {
+    bottom: 20%;
+    left: 8%;
+    animation: floatDrift3 28s ease-in-out infinite;
+}
+
+.float-4 {
+    top: 35%;
+    right: 20%;
+    animation: floatDrift4 32s ease-in-out infinite;
+}
+
+.float-5 {
+    top: 75%;
+    left: 50%;
+    animation: floatDrift5 27s ease-in-out infinite;
+}
+
+@keyframes floatDrift1 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+    25% { transform: translate(-30px, -40px) rotate(5deg); opacity: 0.5; }
+    50% { transform: translate(-50px, -20px) rotate(-3deg); opacity: 0.4; }
+    75% { transform: translate(-20px, -50px) rotate(4deg); opacity: 0.45; }
+}
+
+@keyframes floatDrift2 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.35; }
+    25% { transform: translate(40px, 30px) rotate(-5deg); opacity: 0.5; }
+    50% { transform: translate(60px, 10px) rotate(4deg); opacity: 0.4; }
+    75% { transform: translate(30px, 40px) rotate(-3deg); opacity: 0.45; }
+}
+
+@keyframes floatDrift3 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+    25% { transform: translate(-25px, 35px) rotate(6deg); opacity: 0.5; }
+    50% { transform: translate(-45px, 15px) rotate(-4deg); opacity: 0.4; }
+    75% { transform: translate(-15px, 45px) rotate(5deg); opacity: 0.45; }
+}
+
+@keyframes floatDrift4 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.35; }
+    25% { transform: translate(35px, -30px) rotate(-6deg); opacity: 0.5; }
+    50% { transform: translate(55px, -10px) rotate(5deg); opacity: 0.4; }
+    75% { transform: translate(25px, -40px) rotate(-4deg); opacity: 0.45; }
+}
+
+@keyframes floatDrift5 {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+    25% { transform: translate(-40px, -25px) rotate(4deg); opacity: 0.5; }
+    50% { transform: translate(-60px, -5px) rotate(-5deg); opacity: 0.4; }
+    75% { transform: translate(-30px, -35px) rotate(3deg); opacity: 0.45; }
+}
+
+/* === ABOUT PAGE SVG HORROR EFFECTS === */
+.story-title svg, .section-title svg {
+    fill: currentColor;
+    filter: drop-shadow(0 0 8px currentColor);
+    animation: svgPulseGlow 3s ease-in-out infinite;
+}
+
+.curse-rules li svg {
+    fill: currentColor;
+    filter: drop-shadow(0 0 6px currentColor);
+}
+
+.team-avatar {
+    width: 80px;
+    height: 80px;
+    fill: currentColor;
+    filter: drop-shadow(0 0 15px currentColor);
+    animation: avatarFlicker 4s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes svgPulseGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 8px currentColor);
+        opacity: 1;
+    }
+    50% { 
+        filter: drop-shadow(0 0 15px currentColor) drop-shadow(0 0 20px rgba(255, 0, 0, 0.5));
+        opacity: 0.9;
+    }
+}
+
+@keyframes avatarFlicker {
+    0%, 100% { 
+        filter: drop-shadow(0 0 15px currentColor);
+        opacity: 1;
+    }
+    25% { 
+        filter: drop-shadow(0 0 20px currentColor) drop-shadow(0 0 25px rgba(255, 0, 0, 0.6));
+        opacity: 0.95;
+    }
+    50% { 
+        filter: drop-shadow(0 0 12px currentColor);
+        opacity: 0.9;
+    }
+    51% { 
+        filter: drop-shadow(0 0 18px currentColor);
+        opacity: 1;
+    }
+    75% { 
+        filter: drop-shadow(0 0 22px currentColor) drop-shadow(0 0 28px rgba(255, 0, 0, 0.5));
+        opacity: 0.93;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .float-ghost, .float-pumpkin {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .floating-horror-bg {
+        display: none;
+    }
+}
