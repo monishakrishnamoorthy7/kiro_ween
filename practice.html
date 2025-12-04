@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻 Coding Practice - Haunted CodeLab</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="staticTransition" class="static-transition"></div>
+    <button id="musicToggle" class="music-toggle">🔊</button>
+
+    <div class="container">
+        <header class="main-header">
+            <h1 class="glitch-title" data-text="CODING PRACTICE">CODING PRACTICE</h1>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="practice.html" class="nav-link active">Coding Practice</a>
+            <a href="quiz.html" class="nav-link">Horror Quiz</a>
+            <a href="challenges.html" class="nav-link">Challenges</a>
+            <a href="about.html" class="nav-link">About the Curse</a>
+        </nav>
+
+        <div class="practice-container">
+            <!-- Problem Selector -->
+            <div class="problem-selector">
+                <h3>Select a Cursed Problem:</h3>
+                <select id="problemSelect" class="problem-dropdown">
+                    <option value="0">1. Fix the Corrupted Function</option>
+                    <option value="1">2. Reverse the Curse</option>
+                    <option value="2">3. Sum of Haunted Numbers</option>
+                    <option value="3">4. Find the Ghost in Array</option>
+                    <option value="4">5. Palindrome Spell</option>
+                </select>
+            </div>
+
+            <!-- Main Practice Area -->
+            <div class="practice-grid">
+                <!-- Left: Problem Description -->
+                <div class="problem-panel">
+                    <h2 class="panel-title">📜 Problem Description</h2>
+                    <div id="problemDescription" class="problem-content">
+                        <h3>Fix the Corrupted Function</h3>
+                        <p>The ghost has corrupted this function. Fix it to return the sum of two numbers.</p>
+                        <pre><code>function add(a, b) {
+  return a - b; // This is wrong!
+}</code></pre>
+                        <p><strong>Expected:</strong></p>
+                        <ul>
+                            <li>add(5, 3) → 8</li>
+                            <li>add(10, 20) → 30</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right: Code Editor -->
+                <div class="editor-panel">
+                    <h2 class="panel-title">💻 Code Editor</h2>
+                    <textarea id="codeEditor" class="code-editor" spellcheck="false">function add(a, b) {
+  return a - b;
+}</textarea>
+                    <div class="editor-controls">
+                        <button id="runCode" class="run-button">▶ Run Code</button>
+                        <button id="resetCode" class="reset-button">↻ Reset</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Output -->
+            <div class="terminal-output">
+                <div class="terminal-header">
+                    <span>👻 HAUNTED TERMINAL</span>
+                    <span id="terminalStatus" class="terminal-status">READY</span>
+                </div>
+                <div id="terminalContent" class="terminal-content">
+                    <p class="terminal-line ghost-text">Ghost: Your code awaits judgment...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ghost Comments -->
+        <div id="ghostComment" class="ghost-comment"></div>
+    </div>
+
+    <canvas id="cursorCanvas"></canvas>
+
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="typingSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="whisperSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2482/2482-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="successSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="errorSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2955/2955-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/practice.js"></script>
+</body>
+</html>

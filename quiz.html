@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻 Horror Quiz - Haunted CodeLab</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="staticTransition" class="static-transition"></div>
+    <button id="musicToggle" class="music-toggle">🔊</button>
+
+    <div class="container">
+        <header class="main-header">
+            <h1 class="glitch-title" data-text="HORROR QUIZ">HORROR QUIZ</h1>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="practice.html" class="nav-link">Coding Practice</a>
+            <a href="quiz.html" class="nav-link active">Horror Quiz</a>
+            <a href="challenges.html" class="nav-link">Challenges</a>
+            <a href="about.html" class="nav-link">About the Curse</a>
+        </nav>
+
+        <!-- Quiz Container -->
+        <div id="quizContainer" class="quiz-container">
+            <div class="quiz-header">
+                <div class="quiz-progress">
+                    <span>Question <span id="currentQuestion">1</span> of 10</span>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="quiz-stats">
+                    <span>Score: <span id="score">0</span></span>
+                    <span>Wrong: <span id="wrongCount">0</span>/3</span>
+                </div>
+            </div>
+
+            <div id="questionCard" class="question-card">
+                <h2 id="questionText" class="question-text"></h2>
+                <div id="optionsContainer" class="options-container"></div>
+            </div>
+
+            <button id="nextButton" class="next-button" style="display: none;">Next Question →</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="results-screen" style="display: none;">
+            <h2 class="results-title">Quiz Complete!</h2>
+            <div class="results-content">
+                <div class="final-score">
+                    <span class="score-label">Your Score</span>
+                    <span id="finalScore" class="score-value">0</span>
+                    <span class="score-total">/ 10</span>
+                </div>
+                <p id="resultMessage" class="result-message"></p>
+                <div class="result-buttons">
+                    <button id="retryQuiz" class="cta-button">Try Again</button>
+                    <a href="index.html" class="cta-button">Back to Home</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ghost Popup (3 wrong answers) -->
+        <div id="ghostPopup" class="ghost-popup">
+            <div class="ghost-popup-content">
+                <div class="ghost-icon">👻</div>
+                <h2>The Ghost is Angry!</h2>
+                <p>You've made too many mistakes...</p>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="cursorCanvas"></canvas>
+
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correctSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wrongSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2955/2955-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="scarySound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/1753/1753-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/quiz.js"></script>
+</body>
+</html>

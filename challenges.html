@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻 Challenges - Haunted CodeLab</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div id="staticTransition" class="static-transition"></div>
+    <button id="musicToggle" class="music-toggle">🔊</button>
+
+    <div class="container">
+        <header class="main-header">
+            <h1 class="glitch-title" data-text="CURSED CHALLENGES">CURSED CHALLENGES</h1>
+            <p class="subtitle">Face the darkest coding problems</p>
+        </header>
+
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="practice.html" class="nav-link">Coding Practice</a>
+            <a href="quiz.html" class="nav-link">Horror Quiz</a>
+            <a href="challenges.html" class="nav-link active">Challenges</a>
+            <a href="about.html" class="nav-link">About the Curse</a>
+        </nav>
+
+        <!-- Challenges Grid -->
+        <div class="challenges-grid">
+            <!-- Challenge Card 1 -->
+            <div class="challenge-card" data-difficulty="easy">
+                <div class="challenge-header">
+                    <span class="challenge-number">01</span>
+                    <span class="difficulty-badge easy">EASY</span>
+                </div>
+                <h3 class="challenge-title">The Corrupted Array</h3>
+                <p class="challenge-description">
+                    Find the missing number in a corrupted array of 1 to N.
+                    The ghost has removed one number...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 15 min</span>
+                    <span>💀 100 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(1)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 2 -->
+            <div class="challenge-card" data-difficulty="easy">
+                <div class="challenge-header">
+                    <span class="challenge-number">02</span>
+                    <span class="difficulty-badge easy">EASY</span>
+                </div>
+                <h3 class="challenge-title">Palindrome Curse</h3>
+                <p class="challenge-description">
+                    Check if a string reads the same forwards and backwards.
+                    Break the palindrome spell!
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 10 min</span>
+                    <span>💀 150 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(2)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 3 -->
+            <div class="challenge-card" data-difficulty="medium">
+                <div class="challenge-header">
+                    <span class="challenge-number">03</span>
+                    <span class="difficulty-badge medium">MEDIUM</span>
+                </div>
+                <h3 class="challenge-title">Fibonacci Nightmare</h3>
+                <p class="challenge-description">
+                    Generate the Nth Fibonacci number. The sequence haunts you...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 20 min</span>
+                    <span>💀 80 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(3)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 4 -->
+            <div class="challenge-card" data-difficulty="medium">
+                <div class="challenge-header">
+                    <span class="challenge-number">04</span>
+                    <span class="difficulty-badge medium">MEDIUM</span>
+                </div>
+                <h3 class="challenge-title">Two Sum Terror</h3>
+                <p class="challenge-description">
+                    Find two numbers that add up to a target. The ghost watches...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 25 min</span>
+                    <span>💀 120 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(4)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 5 -->
+            <div class="challenge-card" data-difficulty="hard">
+                <div class="challenge-header">
+                    <span class="challenge-number">05</span>
+                    <span class="difficulty-badge hard">HARD</span>
+                </div>
+                <h3 class="challenge-title">Binary Tree Haunting</h3>
+                <p class="challenge-description">
+                    Traverse a haunted binary tree. Each node holds a dark secret...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 40 min</span>
+                    <span>💀 30 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(5)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 6 -->
+            <div class="challenge-card" data-difficulty="hard">
+                <div class="challenge-header">
+                    <span class="challenge-number">06</span>
+                    <span class="difficulty-badge hard">HARD</span>
+                </div>
+                <h3 class="challenge-title">Longest Substring Curse</h3>
+                <p class="challenge-description">
+                    Find the longest substring without repeating characters.
+                    The curse grows stronger...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 35 min</span>
+                    <span>💀 45 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(6)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 7 -->
+            <div class="challenge-card" data-difficulty="medium">
+                <div class="challenge-header">
+                    <span class="challenge-number">07</span>
+                    <span class="difficulty-badge medium">MEDIUM</span>
+                </div>
+                <h3 class="challenge-title">Anagram Detection</h3>
+                <p class="challenge-description">
+                    Detect if two strings are anagrams. The letters whisper secrets...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 20 min</span>
+                    <span>💀 90 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(7)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 8 -->
+            <div class="challenge-card" data-difficulty="easy">
+                <div class="challenge-header">
+                    <span class="challenge-number">08</span>
+                    <span class="difficulty-badge easy">EASY</span>
+                </div>
+                <h3 class="challenge-title">Reverse String Spell</h3>
+                <p class="challenge-description">
+                    Reverse a string to break the spell. Simple, yet cursed...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 10 min</span>
+                    <span>💀 200 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(8)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 9 -->
+            <div class="challenge-card" data-difficulty="hard">
+                <div class="challenge-header">
+                    <span class="challenge-number">09</span>
+                    <span class="difficulty-badge hard">HARD</span>
+                </div>
+                <h3 class="challenge-title">Merge Sorted Souls</h3>
+                <p class="challenge-description">
+                    Merge two sorted arrays into one. The souls must be ordered...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 30 min</span>
+                    <span>💀 60 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(9)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 10 -->
+            <div class="challenge-card" data-difficulty="medium">
+                <div class="challenge-header">
+                    <span class="challenge-number">10</span>
+                    <span class="difficulty-badge medium">MEDIUM</span>
+                </div>
+                <h3 class="challenge-title">Valid Parentheses</h3>
+                <p class="challenge-description">
+                    Check if parentheses are balanced. The brackets hold dark magic...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 25 min</span>
+                    <span>💀 110 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(10)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 11 -->
+            <div class="challenge-card" data-difficulty="hard">
+                <div class="challenge-header">
+                    <span class="challenge-number">11</span>
+                    <span class="difficulty-badge hard">HARD</span>
+                </div>
+                <h3 class="challenge-title">Climbing Stairs of Doom</h3>
+                <p class="challenge-description">
+                    Count ways to climb N stairs (1 or 2 steps). Each step echoes...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 35 min</span>
+                    <span>💀 50 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(11)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 12 -->
+            <div class="challenge-card" data-difficulty="medium">
+                <div class="challenge-header">
+                    <span class="challenge-number">12</span>
+                    <span class="difficulty-badge medium">MEDIUM</span>
+                </div>
+                <h3 class="challenge-title">Maximum Subarray</h3>
+                <p class="challenge-description">
+                    Find the contiguous subarray with maximum sum. Darkness awaits...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 30 min</span>
+                    <span>💀 70 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(12)">Attempt Challenge</button>
+            </div>
+
+            <!-- Challenge Card 13 -->
+            <div class="challenge-card" data-difficulty="hard">
+                <div class="challenge-header">
+                    <span class="challenge-number">13</span>
+                    <span class="difficulty-badge hard">HARD</span>
+                </div>
+                <h3 class="challenge-title">The Final Curse</h3>
+                <p class="challenge-description">
+                    Implement a LRU Cache. Only the bravest dare attempt this...
+                </p>
+                <div class="challenge-stats">
+                    <span>⏱️ 60 min</span>
+                    <span>💀 13 souls attempted</span>
+                </div>
+                <button class="attempt-button" onclick="attemptChallenge(13)">Attempt Challenge</button>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="cursorCanvas"></canvas>
+
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/challenges.js"></script>
+</body>
+</html>

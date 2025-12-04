@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👻 Haunted CodeLab - Survive the Ghost by Solving Code</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="skull-loader">💀</div>
+        <p class="loading-text">Loading the curse...</p>
+    </div>
+
+    <!-- Static Transition -->
+    <div id="staticTransition" class="static-transition"></div>
+
+    <!-- Background Music Toggle -->
+    <button id="musicToggle" class="music-toggle">🔊</button>
+
+    <!-- Floating Ghost -->
+    <div class="floating-ghost">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+            <path d="M50 20 Q30 20 20 40 L20 70 Q25 65 30 70 Q35 75 40 70 Q45 65 50 70 Q55 75 60 70 Q65 65 70 70 Q75 75 80 70 L80 40 Q70 20 50 20 Z" fill="#9d4edd" opacity="0.8"/>
+            <circle cx="40" cy="45" r="5" fill="#000"/>
+            <circle cx="60" cy="45" r="5" fill="#000"/>
+        </svg>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <h1 class="glitch-title" data-text="HAUNTED CODELAB">HAUNTED CODELAB</h1>
+            <p class="subtitle typewriter">Survive the Ghost by Solving Code</p>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="practice.html" class="nav-link">Coding Practice</a>
+            <a href="quiz.html" class="nav-link">Horror Quiz</a>
+            <a href="challenges.html" class="nav-link">Challenges</a>
+            <a href="about.html" class="nav-link">About the Curse</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <p class="hero-description">
+                    Welcome, mortal... You've entered a cursed coding laboratory.
+                    Only by solving the challenges can you break the spell.
+                    The ghost watches your every keystroke...
+                </p>
+
+                <div class="button-grid">
+                    <a href="practice.html" class="cta-button">
+                        <span>💻 Start Coding Practice</span>
+                    </a>
+                    <a href="quiz.html" class="cta-button">
+                        <span>🧠 Take Horror Quiz</span>
+                    </a>
+                    <a href="challenges.html" class="cta-button">
+                        <span>⚡ View Challenges</span>
+                    </a>
+                    <a href="about.html" class="cta-button">
+                        <span>📖 About the Curse</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Stats Display -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">666</div>
+                    <div class="stat-label">Cursed Lines</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Challenges</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Trapped Souls</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ghost Message -->
+        <div id="ghostMessage" class="ghost-message"></div>
+    </div>
+
+    <!-- Cursor Trail -->
+    <canvas id="cursorCanvas"></canvas>
+
+    <!-- Audio Elements -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="typingSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="whisperSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2482/2482-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
