@@ -1125,3 +1125,239 @@ body::before {
 body.shake {
     animation: screenShake 0.5s;
 }
+
+/* === SKELETON CARD STRUCTURE === */
+.skeleton-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 0, 0, 0.9) 100%);
+    border: 3px solid var(--glitch-red);
+    box-shadow: 
+        0 0 20px rgba(255, 0, 64, 0.5),
+        inset 0 0 30px rgba(255, 0, 64, 0.1);
+    overflow: visible;
+}
+
+.skeleton-skull {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 60px;
+    z-index: 10;
+    animation: skullFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px var(--glitch-red));
+}
+
+@keyframes skullFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0px) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(-10px) rotate(5deg); }
+}
+
+.skeleton-ribs {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    z-index: 1;
+}
+
+.rib {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--glitch-red), transparent);
+    margin: 8px 0;
+    border-radius: 2px;
+    animation: ribPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--glitch-red);
+}
+
+.rib:nth-child(1) { width: 60%; margin-left: 20%; animation-delay: 0s; }
+.rib:nth-child(2) { width: 80%; margin-left: 10%; animation-delay: 0.2s; }
+.rib:nth-child(3) { width: 70%; margin-left: 15%; animation-delay: 0.4s; }
+
+@keyframes ribPulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; box-shadow: 0 0 20px var(--glitch-red); }
+}
+
+.challenge-content-wrapper {
+    position: relative;
+    z-index: 5;
+    padding-top: 50px;
+}
+
+.skeleton-bones {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1;
+}
+
+.bone {
+    width: 40px;
+    height: 8px;
+    background: var(--glitch-red);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 0 10px var(--glitch-red);
+}
+
+.bone::before,
+.bone::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--glitch-red);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--glitch-red);
+}
+
+.bone::before {
+    left: -6px;
+    top: -2px;
+}
+
+.bone::after {
+    right: -6px;
+    top: -2px;
+}
+
+.bone.left {
+    transform: rotate(-15deg);
+    animation: boneShake 3s ease-in-out infinite;
+}
+
+.bone.right {
+    transform: rotate(15deg);
+    animation: boneShake 3s ease-in-out infinite 0.5s;
+}
+
+@keyframes boneShake {
+    0%, 100% { transform: rotate(-15deg) translateY(0); }
+    50% { transform: rotate(-10deg) translateY(-5px); }
+}
+
+.skeleton-card:hover .skeleton-skull {
+    animation: skullShake 0.5s ease-in-out;
+}
+
+@keyframes skullShake {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-10deg); }
+    75% { transform: translateX(-50%) rotate(10deg); }
+}
+
+.skeleton-card:hover .rib {
+    animation: ribGlow 0.5s ease-in-out;
+}
+
+@keyframes ribGlow {
+    0%, 100% { box-shadow: 0 0 10px var(--glitch-red); }
+    50% { box-shadow: 0 0 30px var(--glitch-red), 0 0 50px var(--glitch-red); }
+}
+
+.skeleton-card:hover .bone {
+    animation: boneGlow 0.5s ease-in-out;
+}
+
+@keyframes boneGlow {
+    0%, 100% { box-shadow: 0 0 10px var(--glitch-red); }
+    50% { box-shadow: 0 0 30px var(--glitch-red); }
+}
+
+/* Skeleton card difficulty variations */
+.skeleton-card[data-difficulty="easy"] {
+    border-color: var(--neon-green);
+}
+
+.skeleton-card[data-difficulty="easy"] .skeleton-skull,
+.skeleton-card[data-difficulty="easy"] .rib,
+.skeleton-card[data-difficulty="easy"] .bone {
+    filter: drop-shadow(0 0 20px var(--neon-green));
+}
+
+.skeleton-card[data-difficulty="easy"] .rib {
+    background: linear-gradient(90deg, transparent, var(--neon-green), transparent);
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.skeleton-card[data-difficulty="easy"] .bone {
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.skeleton-card[data-difficulty="easy"] .bone::before,
+.skeleton-card[data-difficulty="easy"] .bone::after {
+    background: var(--neon-green);
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.skeleton-card[data-difficulty="medium"] {
+    border-color: #ffa500;
+}
+
+.skeleton-card[data-difficulty="medium"] .skeleton-skull,
+.skeleton-card[data-difficulty="medium"] .rib,
+.skeleton-card[data-difficulty="medium"] .bone {
+    filter: drop-shadow(0 0 20px #ffa500);
+}
+
+.skeleton-card[data-difficulty="medium"] .rib {
+    background: linear-gradient(90deg, transparent, #ffa500, transparent);
+    box-shadow: 0 0 10px #ffa500;
+}
+
+.skeleton-card[data-difficulty="medium"] .bone {
+    background: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+}
+
+.skeleton-card[data-difficulty="medium"] .bone::before,
+.skeleton-card[data-difficulty="medium"] .bone::after {
+    background: #ffa500;
+    box-shadow: 0 0 10px #ffa500;
+}
+
+/* Add spine to skeleton cards */
+.skeleton-card::after {
+    content: '';
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 60%;
+    background: repeating-linear-gradient(
+        0deg,
+        var(--glitch-red) 0px,
+        var(--glitch-red) 10px,
+        transparent 10px,
+        transparent 15px
+    );
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.skeleton-card[data-difficulty="easy"]::after {
+    background: repeating-linear-gradient(
+        0deg,
+        var(--neon-green) 0px,
+        var(--neon-green) 10px,
+        transparent 10px,
+        transparent 15px
+    );
+}
+
+.skeleton-card[data-difficulty="medium"]::after {
+    background: repeating-linear-gradient(
+        0deg,
+        #ffa500 0px,
+        #ffa500 10px,
+        transparent 10px,
+        transparent 15px
+    );
+}
