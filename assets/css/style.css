@@ -187,6 +187,8 @@ body.shake {
     margin: 0 auto;
     padding: 20px;
     min-height: 100vh;
+    position: relative;
+    z-index: 10;
 }
 
 /* === HEADER === */
@@ -199,9 +201,14 @@ body.shake {
     font-size: 64px;
     font-weight: bold;
     color: var(--neon-green);
-    text-shadow: 0 0 20px var(--neon-green);
+    text-shadow: 
+        0 0 10px var(--neon-green),
+        0 0 20px var(--neon-green),
+        0 0 40px var(--neon-green),
+        0 0 80px rgba(0, 255, 65, 0.5);
     position: relative;
     animation: flicker 3s infinite;
+    letter-spacing: 4px;
 }
 
 @keyframes flicker {
@@ -289,9 +296,11 @@ body.shake {
     padding: 12px 24px;
     border: 2px solid var(--neon-green);
     background: rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(10px);
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
 .nav-link::before {
@@ -314,7 +323,11 @@ body.shake {
 .nav-link:hover,
 .nav-link.active {
     color: var(--bg-dark);
-    box-shadow: 0 0 20px var(--neon-green);
+    box-shadow: 
+        0 0 20px var(--neon-green),
+        0 0 40px var(--neon-green),
+        inset 0 0 20px rgba(0, 255, 65, 0.3);
+    transform: translateY(-2px);
 }
 
 /* === HERO SECTION === */
@@ -346,6 +359,7 @@ body.shake {
     display: block;
     padding: 20px;
     background: rgba(0, 255, 65, 0.1);
+    backdrop-filter: blur(10px);
     border: 2px solid var(--neon-green);
     color: var(--neon-green);
     text-decoration: none;
@@ -353,6 +367,9 @@ body.shake {
     transition: all 0.3s;
     position: relative;
     overflow: hidden;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 65, 0.2),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
 }
 
 .cta-button::before {
@@ -376,8 +393,11 @@ body.shake {
 
 .cta-button:hover {
     color: var(--bg-dark);
-    box-shadow: 0 0 30px var(--neon-green);
-    transform: translateY(-5px);
+    box-shadow: 
+        0 0 30px var(--neon-green),
+        0 0 60px rgba(0, 255, 65, 0.5),
+        0 8px 25px rgba(0, 255, 65, 0.3);
+    transform: translateY(-8px) scale(1.02);
 }
 
 /* === STATS === */
@@ -390,23 +410,58 @@ body.shake {
 
 .stat-card {
     background: rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(10px);
     border: 2px solid var(--neon-green);
     padding: 30px;
     text-align: center;
     transition: all 0.3s;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 65, 0.1),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s;
+}
+
+.stat-card:hover::before {
+    left: 100%;
 }
 
 .stat-card:hover {
-    background: rgba(0, 255, 65, 0.1);
-    box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
-    transform: scale(1.05);
+    background: rgba(0, 255, 65, 0.15);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 65, 0.4),
+        0 0 60px rgba(0, 255, 65, 0.2),
+        inset 0 0 30px rgba(0, 255, 65, 0.1);
+    transform: scale(1.05) translateY(-5px);
+    border-color: var(--ghost-purple);
 }
 
 .stat-number {
     font-size: 48px;
     font-weight: bold;
     color: var(--glitch-red);
-    text-shadow: 0 0 20px var(--glitch-red);
+    text-shadow: 
+        0 0 10px var(--glitch-red),
+        0 0 20px var(--glitch-red),
+        0 0 40px rgba(255, 0, 64, 0.5);
+    animation: numberPulse 2s ease-in-out infinite;
+}
+
+@keyframes numberPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 .stat-label {
@@ -856,11 +911,15 @@ body.shake {
 
 .challenge-card {
     background: rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(10px);
     border: 2px solid var(--neon-green);
     padding: 30px;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
     overflow: hidden;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 65, 0.1),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
 }
 
 .challenge-card::before {
@@ -880,9 +939,20 @@ body.shake {
 }
 
 .challenge-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(0, 255, 65, 0.3);
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 
+        0 15px 50px rgba(0, 255, 65, 0.4),
+        0 0 60px rgba(0, 255, 65, 0.2),
+        inset 0 0 30px rgba(0, 255, 65, 0.1);
+    border-color: var(--ghost-purple);
     animation: glitchCard 0.3s;
+}
+
+.challenge-card:hover .challenge-number {
+    color: var(--ghost-purple);
+    text-shadow: 
+        0 0 20px var(--ghost-purple),
+        0 0 40px var(--ghost-purple);
 }
 
 @keyframes glitchCard {
@@ -953,18 +1023,45 @@ body.shake {
     width: 100%;
     padding: 15px;
     background: rgba(0, 255, 65, 0.1);
+    backdrop-filter: blur(5px);
     border: 2px solid var(--neon-green);
     color: var(--neon-green);
     font-family: 'Courier New', monospace;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.2);
+}
+
+.attempt-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--neon-green);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s, height 0.5s;
+    z-index: -1;
+}
+
+.attempt-button:hover::before {
+    width: 300%;
+    height: 300%;
 }
 
 .attempt-button:hover {
-    background: var(--neon-green);
     color: var(--bg-dark);
-    box-shadow: 0 0 20px var(--neon-green);
+    box-shadow: 
+        0 0 30px var(--neon-green),
+        0 0 60px rgba(0, 255, 65, 0.5),
+        0 8px 25px rgba(0, 255, 65, 0.3);
+    transform: translateY(-3px);
 }
 
 /* === ABOUT PAGE === */
@@ -2926,4 +3023,483 @@ body.shake {
         border-bottom: 2px solid var(--neon-green);
         max-height: 200px;
     }
+}
+
+/* === ENHANCED VISUAL EFFECTS === */
+
+/* Gradient background for body */
+body {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+/* Floating particles effect */
+.particle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle-bg::before,
+.particle-bg::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 10px var(--neon-green),
+        100px 200px 0 var(--ghost-purple),
+        200px 100px 0 var(--glitch-red),
+        300px 300px 0 var(--neon-green),
+        400px 150px 0 var(--ghost-purple),
+        500px 250px 0 var(--glitch-red),
+        600px 50px 0 var(--neon-green),
+        700px 350px 0 var(--ghost-purple),
+        800px 200px 0 var(--glitch-red),
+        900px 100px 0 var(--neon-green);
+    animation: particleFloat 20s linear infinite;
+}
+
+.particle-bg::after {
+    animation-delay: -10s;
+}
+
+@keyframes particleFloat {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Enhanced challenge card skeleton */
+.skeleton-card {
+    position: relative;
+}
+
+.skeleton-skull {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    filter: drop-shadow(0 0 10px var(--ghost-purple));
+    animation: skullFloat 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes skullFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.skeleton-ribs {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0.3;
+}
+
+.rib {
+    width: 60px;
+    height: 2px;
+    background: var(--neon-green);
+    box-shadow: 0 0 5px var(--neon-green);
+    border-radius: 2px;
+}
+
+.skeleton-bones {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    opacity: 0.2;
+}
+
+.bone {
+    width: 30px;
+    height: 3px;
+    background: var(--neon-green);
+    box-shadow: 0 0 5px var(--neon-green);
+    border-radius: 2px;
+}
+
+.challenge-content-wrapper {
+    position: relative;
+    z-index: 5;
+    padding-top: 30px;
+}
+
+/* Enhanced difficulty badges */
+.difficulty-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px currentColor;
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 10px currentColor; }
+    50% { box-shadow: 0 0 20px currentColor; }
+}
+
+/* Enhanced hero section */
+.hero-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* Glowing borders */
+.glow-border {
+    position: relative;
+}
+
+.glow-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--neon-green), var(--ghost-purple), var(--glitch-red), var(--neon-green));
+    background-size: 400%;
+    border-radius: inherit;
+    z-index: -1;
+    animation: glowRotate 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.glow-border:hover::before {
+    opacity: 1;
+}
+
+@keyframes glowRotate {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
+
+/* Enhanced terminal output */
+.terminal-output {
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--neon-green);
+    margin-top: 30px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.3),
+        inset 0 0 30px rgba(0, 255, 65, 0.05);
+}
+
+/* Enhanced quiz cards */
+.question-card {
+    background: rgba(0, 255, 65, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--neon-green);
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 65, 0.2),
+        inset 0 0 20px rgba(0, 255, 65, 0.05);
+}
+
+/* Enhanced option buttons */
+.option-button {
+    padding: 20px;
+    background: rgba(0, 255, 65, 0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--neon-green);
+    color: var(--neon-green);
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 255, 65, 0.1);
+}
+
+.option-button:hover {
+    background: rgba(0, 255, 65, 0.2);
+    transform: translateX(10px) scale(1.02);
+    box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.4),
+        inset 0 0 10px rgba(0, 255, 65, 0.2);
+}
+
+/* Enhanced modal */
+.editor-modal-content {
+    width: 100%;
+    max-width: 1400px;
+    height: 90vh;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border: 3px solid var(--neon-green);
+    box-shadow: 
+        0 0 50px rgba(0, 255, 65, 0.5),
+        0 0 100px rgba(0, 255, 65, 0.3),
+        inset 0 0 50px rgba(0, 255, 65, 0.1);
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--neon-green);
+    border-radius: 5px;
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ghost-purple);
+    box-shadow: 0 0 15px var(--ghost-purple);
+}
+
+/* Loading animation */
+@keyframes loadingPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.95); }
+}
+
+/* Text selection */
+::selection {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+}
+
+::-moz-selection {
+    background: var(--neon-green);
+    color: var(--bg-dark);
+}
+
+/* === SKELETON DECORATIONS FOR HOME PAGE === */
+
+/* Stat cards with skeleton */
+.stat-card {
+    position: relative;
+    padding-top: 50px !important;
+}
+
+.stat-icon {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 15px currentColor);
+    animation: iconFloat 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(-15px) rotate(5deg); }
+}
+
+.stat-glow {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: glowSlide 2s ease-in-out infinite;
+}
+
+@keyframes glowSlide {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Feature cards skeleton style */
+.feature-card {
+    position: relative;
+    padding-top: 40px;
+}
+
+.feature-icon {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px currentColor);
+    animation: iconBounce 2s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* Add skeleton ribs to stat cards */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 30px;
+    background: 
+        linear-gradient(90deg, transparent 35%, var(--neon-green) 35%, var(--neon-green) 37%, transparent 37%),
+        linear-gradient(90deg, transparent 48%, var(--neon-green) 48%, var(--neon-green) 52%, transparent 52%),
+        linear-gradient(90deg, transparent 63%, var(--neon-green) 63%, var(--neon-green) 65%, transparent 65%);
+    background-size: 100% 8px;
+    background-position: 0 0, 0 10px, 0 20px;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: 1;
+}
+
+/* Add skeleton bones to bottom */
+.stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    right: 20px;
+    height: 3px;
+    background: 
+        linear-gradient(90deg, var(--neon-green) 0%, var(--neon-green) 30%, transparent 30%, transparent 70%, var(--neon-green) 70%, var(--neon-green) 100%);
+    opacity: 0.2;
+    box-shadow: 0 0 5px var(--neon-green);
+}
+
+/* Stat content wrapper */
+.stat-content-wrapper,
+.button-content-wrapper {
+    position: relative;
+    z-index: 5;
+}
+
+/* Enhanced stat number animation */
+.stat-number {
+    position: relative;
+    z-index: 5;
+}
+
+.stat-number::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(255, 0, 64, 0.2) 0%, transparent 70%);
+    animation: numberGlow 2s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes numberGlow {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* CTA buttons with skeleton */
+.cta-button.skeleton-card {
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.cta-button .skeleton-skull {
+    top: -25px;
+    font-size: 50px;
+}
+
+.cta-button .skeleton-ribs {
+    top: 25px;
+}
+
+.cta-button .skeleton-bones {
+    bottom: 5px;
+}
+
+/* Hover effects for skeleton elements */
+.skeleton-card:hover .skeleton-skull {
+    animation: skullShake 0.5s ease-in-out;
+}
+
+@keyframes skullShake {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    25% { transform: translateX(-50%) translateY(-5px) rotate(-10deg); }
+    75% { transform: translateX(-50%) translateY(-5px) rotate(10deg); }
+}
+
+.skeleton-card:hover .rib {
+    animation: ribExpand 0.3s ease-in-out;
+}
+
+@keyframes ribExpand {
+    0%, 100% { width: 60px; }
+    50% { width: 70px; }
+}
+
+.skeleton-card:hover .bone {
+    animation: boneGlow 0.5s ease-in-out;
+}
+
+@keyframes boneGlow {
+    0%, 100% { box-shadow: 0 0 5px var(--neon-green); }
+    50% { box-shadow: 0 0 15px var(--neon-green), 0 0 25px var(--neon-green); }
+}
+
+/* Spine decoration for containers */
+.spine-decoration {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, 
+        transparent 0%, 
+        var(--neon-green) 10%, 
+        transparent 20%,
+        var(--neon-green) 30%,
+        transparent 40%,
+        var(--neon-green) 50%,
+        transparent 60%,
+        var(--neon-green) 70%,
+        transparent 80%,
+        var(--neon-green) 90%,
+        transparent 100%
+    );
+    transform: translateX(-50%);
+    opacity: 0.1;
+    z-index: 0;
 }
