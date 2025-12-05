@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Challenges - Haunted CodeLab</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .challenge-arena {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        .challenge-header {
+            background: linear-gradient(135deg, #1a0033 0%, #2d0052 100%);
+            border: 3px solid #9d4edd;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 40px rgba(157, 78, 221, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 84, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .challenge-title {
+            font-size: 36px;
+            color: #e0aaff;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(157, 78, 221, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        .challenge-difficulty {
+            text-align: center;
+            font-size: 18px;
+            color: #ff0054;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .challenge-description {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #9d4edd;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            color: #e0aaff;
+            line-height: 1.8;
+        }
+
+        .challenge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .ghost-challenge-card {
+            background: linear-gradient(135deg, #2d0052 0%, #1a0033 100%);
+            border: 2px solid #9d4edd;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ghost-challenge-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 50px rgba(157, 78, 221, 0.7);
+            border-color: #ff0054;
+        }
+
+        .ghost-challenge-card::after {
+            content: '👻';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 48px;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .ghost-challenge-card:hover::after {
+            opacity: 1;
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        .challenge-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff0054;
+            text-align: center;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 0, 84, 0.8);
+        }
+
+        .challenge-name {
+            font-size: 20px;
+            color: #e0aaff;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .challenge-hint {
+            font-size: 14px;
+            color: #c77dff;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .challenge-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #9d4edd 0%, #7209b7 100%);
+            border: 2px solid #e0aaff;
+            color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .challenge-btn:hover {
+            background: linear-gradient(135deg, #ff0054 0%, #c9184a 100%);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 84, 0.8);
+        }
+
+        .ghost-ai-companion {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 150px;
+            height: 150px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        .ghost-speech-bubble {
+            position: absolute;
+            bottom: 160px;
+            right: 30px;
+            background: rgba(157, 78, 221, 0.95);
+            border: 2px solid #e0aaff;
+            border-radius: 15px;
+            padding: 15px 20px;
+            max-width: 300px;
+            color: #fff;
+            font-size: 14px;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.6);
+            display: none;
+        }
+
+        .ghost-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 60px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid rgba(157, 78, 221, 0.95);
+        }
+
+        .challenge-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            max-width: 900px;
+            margin: 50px auto;
+            background: linear-gradient(135deg, #1a0033 0%, #2d0052 100%);
+            border: 3px solid #9d4edd;
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 36px;
+            color: #e0aaff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: #ff0054;
+            transform: rotate(90deg);
+        }
+
+        .code-example {
+            background: #0d0221;
+            border: 1px solid #9d4edd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #06ffa5;
+            overflow-x: auto;
+        }
+
+        .test-cases {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #9d4edd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .test-case {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(157, 78, 221, 0.1);
+            border-left: 3px solid #9d4edd;
+        }
+    </style>
+</head>
+<body>
+    <div id="staticTransition" class="static-transition"></div>
+    <button id="musicToggle" class="music-toggle">
+        <svg class="music-icon" viewBox="0 0 24 24">
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <header class="main-header">
+            <h1 class="glitch-title" data-text="GHOST CHALLENGES">GHOST CHALLENGES</h1>
+            <p class="subtitle">Face the supernatural coding trials 👻💀</p>
+        </header>
+
+        <div class="challenge-arena">
+            <div class="challenge-header">
+                <h2 class="challenge-title">🕸️ THE HAUNTED ALGORITHM TRIALS 🕸️</h2>
+                <p class="challenge-difficulty">⚠️ DIFFICULTY: SUPERNATURAL ⚠️</p>
+                <div class="challenge-description">
+                    <p>Welcome, brave soul... You have entered the Ghost Challenge Arena, where algorithms meet the paranormal.</p>
+                    <p>Each challenge is cursed with increasing difficulty. Solve them all to free the trapped spirits and break the eternal curse!</p>
+                    <p>💀 The Ghost AI will guide you... or mislead you. Trust at your own risk.</p>
+                </div>
+            </div>
+
+            <div class="challenge-grid">
+                <!-- Challenge 1 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(1)">
+                    <div class="challenge-number">01</div>
+                    <div class="challenge-name">The Vanishing Number</div>
+                    <div class="challenge-hint">"One soul has escaped the array..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 2 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(2)">
+                    <div class="challenge-number">02</div>
+                    <div class="challenge-name">Reverse the Curse</div>
+                    <div class="challenge-hint">"Mirror the string to break the spell..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 3 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(3)">
+                    <div class="challenge-number">03</div>
+                    <div class="challenge-name">Palindrome Detection</div>
+                    <div class="challenge-hint">"Does it read the same forwards and backwards?"</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 4 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(4)">
+                    <div class="challenge-number">04</div>
+                    <div class="challenge-name">Two Souls, One Target</div>
+                    <div class="challenge-hint">"Find two numbers that sum to the cursed value..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 5 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(5)">
+                    <div class="challenge-number">05</div>
+                    <div class="challenge-name">Fibonacci Nightmare</div>
+                    <div class="challenge-hint">"The sequence haunts you eternally..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 6 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(6)">
+                    <div class="challenge-number">06</div>
+                    <div class="challenge-name">Anagram Spirits</div>
+                    <div class="challenge-hint">"Are these words the same soul in different forms?"</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 7 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(7)">
+                    <div class="challenge-number">07</div>
+                    <div class="challenge-name">Haunted Parentheses</div>
+                    <div class="challenge-hint">"Balance the brackets or face eternal chaos..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 8 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(8)">
+                    <div class="challenge-number">08</div>
+                    <div class="challenge-name">Maximum Subarray Curse</div>
+                    <div class="challenge-hint">"Find the most powerful contiguous sequence..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 9 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(9)">
+                    <div class="challenge-number">09</div>
+                    <div class="challenge-name">Binary Tree Haunting</div>
+                    <div class="challenge-hint">"Traverse the tree of lost souls..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 10 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(10)">
+                    <div class="challenge-number">10</div>
+                    <div class="challenge-name">Longest Substring Spell</div>
+                    <div class="challenge-hint">"No repeating characters allowed..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 11 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(11)">
+                    <div class="challenge-number">11</div>
+                    <div class="challenge-name">Merge Sorted Souls</div>
+                    <div class="challenge-hint">"Unite two ordered arrays into one..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 12 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(12)">
+                    <div class="challenge-number">12</div>
+                    <div class="challenge-name">Climbing Stairs of Doom</div>
+                    <div class="challenge-hint">"How many ways to reach the top?"</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+
+                <!-- Challenge 13 -->
+                <div class="ghost-challenge-card" onclick="openChallenge(13)">
+                    <div class="challenge-number">13</div>
+                    <div class="challenge-name">The Final Curse: LRU Cache</div>
+                    <div class="challenge-hint">"Only the bravest dare attempt this..."</div>
+                    <button class="challenge-btn">Enter Challenge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ghost AI Companion -->
+    <div class="ghost-ai-companion" onclick="toggleGhostSpeech()">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 15 Q30 15 20 35 L20 70 Q25 65 30 70 Q35 75 40 70 Q45 65 50 70 Q55 75 60 70 Q65 65 70 70 Q75 75 80 70 L80 35 Q70 15 50 15 Z" 
+                  fill="#9d4edd" opacity="0.9"/>
+            <circle cx="38" cy="42" r="8" fill="#ff0054"/>
+            <circle cx="62" cy="42" r="8" fill="#ff0054"/>
+            <circle cx="38" cy="42" r="4" fill="#fff"/>
+            <circle cx="62" cy="42" r="4" fill="#fff"/>
+            <path d="M40 55 Q50 60 60 55" stroke="#000" stroke-width="3" fill="none"/>
+        </svg>
+    </div>
+
+    <div class="ghost-speech-bubble" id="ghostSpeech">
+        Click on a challenge to begin your trial... if you dare! 👻
+    </div>
+
+    <!-- Challenge Modal -->
+    <div class="challenge-modal" id="challengeModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeChallenge()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Cursor Canvas -->
+    <canvas id="cursorCanvas"></canvas>
+
+    <!-- Floating Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <!-- Sound Effects -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/2489/2489-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="ghostWhisper">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2482/2482-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="whisperSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2482/2482-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="successSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="errorSound">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2955/2955-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/ghost-challenges.js"></script>
+</body>
+</html>
